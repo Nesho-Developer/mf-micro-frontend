@@ -1,0 +1,9 @@
+{
+  "header": "http://localhost:4201",
+  "footer": "http://localhost:4202",
+  "home": "http://localhost:4203",
+  "login": "http://localhost:4204",
+  "dashboard": "http://localhost:4205",
+  "users": "http://localhost:4206",
+  "roles": "http://localhost:4207"
+}

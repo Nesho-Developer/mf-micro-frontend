@@ -1,0 +1,5 @@
+{
+  "header": "http://localhost:4201",
+  "footer": "http://localhost:4202",
+  "form": "http://localhost:4203"
+}

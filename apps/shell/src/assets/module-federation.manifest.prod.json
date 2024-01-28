@@ -1,0 +1,5 @@
+{
+  "header": "../header/remoteEntry.mjs",
+  "footer": "../footer/remoteEntry.mjs",
+  "form": "../form/remoteEntry.mjs"
+}

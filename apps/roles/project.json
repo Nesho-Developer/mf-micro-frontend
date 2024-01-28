@@ -1,0 +1,107 @@
+{
+  "name": "roles",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "mf-micro-front",
+  "sourceRoot": "apps/roles/src",
+  "tags": ["remote"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/roles",
+        "index": "apps/roles/src/index.html",
+        "main": "apps/roles/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/roles/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/roles/src/favicon.ico", "apps/roles/src/assets"],
+        "styles": ["apps/roles/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/roles/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/roles/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "port": 4207,
+        "publicHost": "http://localhost:4207"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "roles:build:production"
+        },
+        "development": {
+          "buildTarget": "roles:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "roles:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/roles/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "roles:build",
+        "port": 4207,
+        "watch": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "roles:build:development"
+        },
+        "production": {
+          "buildTarget": "roles:build:production"
+        }
+      }
+    }
+  }
+}
